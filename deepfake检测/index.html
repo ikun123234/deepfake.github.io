@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人脸伪造检测网站</title>
+    <link rel="icon" href="图标.png" type="image/png">
+    <!-- 引入Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(-180deg, #EBEBEB 0%, #DCDDDF 48%, #C4C5C7 99%);
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+        .news-column {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .main-content {
+            flex: 2;
+            margin-left: 20px;
+        }
+        .upload-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #f8f9fa;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .upload-section p {
+            margin: 0;
+            font-size: 24px; /* 放大字体 */
+            color: #666;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: #fff;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        .button-group button {
+            flex: 1; /* 使按钮占据相同的空间 */
+            margin: 0 5px; /* 添加一些间隔 */
+        }
+        .contact-btn, .api-btn,.example-btn{
+            /* padding: 10px 20px;
+            font-size: 18px; */
+            padding: 10px; /* 为了保持按钮的圆形，将padding设置为相等的值 */
+    font-size: 18px;
+    width: 60px; /* 根据需要设置按钮的宽度，这里设置为60px */
+    height: 60px; /* 为了形成圆形，高度需要与宽度相同 */
+    line-height: 60px; /* 为了垂直居中文本，line-height需要与高度相同 */
+    border-radius: 30px; /* 设置边框半径为高度的一半，创建圆形按钮 */
+    background-color: #db9034; /* 举例的背景颜色 */
+    color: white; /* 设置文本颜色 */
+    border: none; /* 移除按钮边框 */
+    cursor: pointer; /* 将鼠标光标改为指针形状 */
+    text-align: center; /* 文本居中对齐 */
+    display: inline-flex; /* 使用Flexbox布局 */
+    justify-content: center; /* 水平居中按钮内的文本 */
+    align-items: center; /* 垂直居中按钮内的文本 */
+        }
+        /* 添加登录注册按钮样式 */
+        .login-register-btns {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        h1.artistic-text.text-center {
+            font-family: 'Pacifico', cursive; /* 使用艺术字体 */
+            text-shadow: 2px 2px 4px #ff0000; /* 添加文字阴影，颜色为鲜艳的红色 */
+            border: 1px solid #ff0000; /* 添加边框，颜色为鲜艳的红色 */
+            border-radius: 5px; /* 边框圆角 */
+            padding: 10px; /* 添加内边距 */
+            font-size: 70px; /* 增大字体大小 */
+            margin: 0; /* 移除上下外边距 */
+            margin-left: 20px; /* 距离左边距 */
+            margin-top: 20px; /* 距离顶部距离 */
+            display: inline-block; /* 使文本为行内块级元素 */
+            background-color: #ffcccc; /* 添加背景颜色，颜色为粉红色，与文字颜色形成对比 */
+        }
+        .login-btn, .register-btn {
+            padding: 0; /* 增加内边距，确保文本不会太靠近边缘 */
+            font-size: 18px; /* 增大字体大小，使文本更明显 */
+            width: 60px; /* 增加按钮宽度 */
+            height: 60px; /* 增加按钮高度，与宽度保持一致 */
+            line-height: 60px; /* 调整行高以垂直居中文本 */
+            border-radius: 30px; /* 调整边框半径，使按钮保持完全圆形 */
+            background-color: #3498db; /* 背景颜色 */
+            color: rgb(21, 21, 21); /* 文本颜色 */
+            border: none; /* 移除按钮边框 */
+            cursor: pointer; /* 将鼠标光标改为指针形状 */
+            display: flex; /* 使用Flexbox布局 */
+            align-items: center; /* 垂直居中按钮内的文本 */
+            justify-content: center; /* 水平居中按钮内的文本 */
+        }
+    </style>
+</head>
+<body>
+    <h1 class="artistic-text text-center">
+        随"域"而安
+    </h1>
+    <div class="container">
+        <div class="news-column">
+            <!-- 轮播图代码 -->
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <h3>Deepfake首次“参与战争”：乌克兰总统被伪造投降视频，推特上辟谣</h3>
+                        <a href="https://www.thepaper.cn/newsDetail_forward_17262083" target="_blank">
+                        <img src="https://imagepphcloud.thepaper.cn/pph/image/185/782/312.jpg" alt="新闻图片" width="300" height="200">
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <h3>惊动美国白宫、有公司被骗2亿港元，AI “深度伪造”的罪与罚</h3>
+                        <a href="https://www.nbd.com.cn/articles/2024-02-18/3246148.html" target="_blank">
+                        <img src="https://image.nbd.com.cn/uploads/articles/images/1537844/640.jpg" alt="新闻图片" width="300" height="200">
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <h3>Deepfake！黑客冒充非洲联盟主席与多位欧洲领导人通话</h3>
+                        <a href="https://new.qq.com/rain/a/20231020A07Y1B00" target="_blank">
+                        <img src="https://inews.gtimg.com/news_bt/OMEvZGva2oA-adIQdhKgSaTqztYR3EtrYaO6VIksKxh0kAA/641" alt="新闻图片" width="300" height="200">
+                        </a>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="upload-section" id="uploadArea">
+                <p>将您的文件拖放到此处<br>或<br>点击上传文件</p>
+                <input type="file" id="image-upload" accept="image/*" style="display: none;">
+                <button class="btn btn-primary" onclick="document.getElementById('image-upload').click()">点击上传</button>
+            </div>
+            <div class="result" id="result">
+                <!-- 检测结果将在这里显示 -->
+            </div>
+            <div class="button-group">
+                <button class="btn btn-success contact-btn" onclick="contactUs()">联系我们</button>
+                <button class="btn btn-info api-btn" onclick="apiAccess()">API接入</button>
+                <button class="btn btn-primary example-btn" onclick="Example()">示例视频</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        版权所有 &copy; 2024 人脸伪造检测网站
+        <div class="login-register-btns">
+            <button class="btn btn-primary login-btn" onclick="location.href='login.html'">登录</button>
+            <button class="btn btn-success register-btn" onclick="location.href='reg.html'">注册</button>
+        </div>
+    </div>
+    <!-- 引入Bootstrap JavaScript 和依赖的Popper.js -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.3/dist/umd/popper.min.js"></script> 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  -->
+    <script>
+        // 拖放上传功能
+        var uploadArea = document.getElementById('uploadArea');
+        var fileInput = document.getElementById('image-upload');
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.style.backgroundColor = '#f8f9fa';
+        });
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            uploadArea.style.backgroundColor = '';
+        });
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadArea.style.backgroundColor = '';
+            if (e.dataTransfer.items) {
+                for (var i = 0; i < e.dataTransfer.items.length; i++) {
+                    if (e.dataTransfer.items[i].kind === 'file') {
+                        var file = e.dataTransfer.items[i].getAsFile();
+                        console.log(file.name);
+                        displayFileName(file.name);
+                    }
+                }
+            }
+        });
+        fileInput.addEventListener('change', function(event) {
+            var file = event.target.files[0];
+            if (file) {
+                console.log(file.name);
+                displayFileName(file.name);
+            }
+        });
+        function displayFileName(fileName) {
+            var resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '已上传文件：' + fileName;
+        }
+        function contactUs() {
+            // 联系我们的函数逻辑
+            alert('请加QQ1490166708');
+        }
+        function apiAccess() {
+            // API接入的函数逻辑
+            window.open("https://chat.openai.com/chat", "_blank");
+        }
+        function Example() {
+            // API接入的函数逻辑
+            window.open("https://share.weiyun.com/XP02tDjk", "_blank");
+        }
+        function Example2() {
+            // API接入的函数逻辑
+            window.open("https://share.weiyun.com/XP02tDjk", "_blank");
+        }
+    </script>
+</body>
+</html>
